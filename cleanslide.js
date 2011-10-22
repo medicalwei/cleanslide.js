@@ -1,11 +1,15 @@
 page = 0;
 subpage = 0;
-$(window).ready(function(){
+$(document).ready(function(){
+  blocks = $('body>*');
+
   $.prototype.setToCenter = function(subpage){
     $("body>*").removeClass("current");
     this.addClass("current");
     var innerOffset;
-    if (this.height() <= $(window).height()) { // check if it is a big block
+
+    // check if it is a big block
+    if (this.height() <= $(window).height()) {
       innerOffset = (this.outerHeight() - $(window).height()) / 2;
     } else {
       innerOffset = (this.outerHeight()-this.height()) / 2 + $(window).height() * subpage * 0.8; // overflow
@@ -19,7 +23,6 @@ $(window).ready(function(){
   });
 
   $(window).keyup(function(event){
-    var blocks = $('body>*');
     var current = blocks.eq(page);
 
     if (event.keyCode == 40) { // down
@@ -39,8 +42,16 @@ $(window).ready(function(){
         subpage = 0;
       }
     }
+
     blocks.eq(page).setToCenter(subpage);
+    window.location.hash = "#" + page;
   });
+
+  // get hash
+  var hashpage = parseInt(window.location.hash.substring(1));
+  if (hashpage) {
+    page = hashpage;
+  }
 
   blocks.eq(page).setToCenter(subpage);
 });
