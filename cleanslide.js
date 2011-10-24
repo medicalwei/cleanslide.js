@@ -22,6 +22,11 @@ $(document).ready(function(){
     $('body>*').eq(page).setToCenter();
   });
 
+  $(window).keydown(function(event){
+    event.stopPropagation();
+    event.preventDefault();
+  });
+
   $(window).keyup(function(event){
     var current = blocks.eq(page);
 
