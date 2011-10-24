@@ -3,21 +3,27 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-@import "compass/reset";
 @import "compass/css3";
+
+html
+{
+  background: #000;
+}
 
 body
 {
   width: 1024px;
   font-size: 64px;
-  outline: 1px solid #000;
   margin: 0 auto 0;
+  background: #fff;
   @include transition(margin-top 0.5s ease);
   overflow: hidden;
   line-height: 1.5em;
+  position: relative;
 
   &>* {
     padding: 512px 2em;
+    margin: 0;
   }
 
   &>p>img:first-child {
@@ -28,7 +34,10 @@ body
 
   ul>li {
     padding: 0.5em 0;
-    list-style: circle outside;
+  }
+
+  &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>h7{
+    font-size: 1.2em;
   }
 }
 
