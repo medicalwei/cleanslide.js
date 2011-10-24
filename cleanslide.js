@@ -23,29 +23,39 @@ $(document).ready(function(){
   });
 
   $(window).keydown(function(event){
-    event.stopPropagation();
-    event.preventDefault();
+    switch (event.keyCode)
+    {
+      case 40: case 38:
+        event.stopPropagation();
+        event.preventDefault();
+        break;
+    }
   });
 
   $(window).keyup(function(event){
     var current = blocks.eq(page);
 
-    if (event.keyCode == 40) { // down
-      innerBottom = current.position().top + (current.outerHeight()-current.height()) / 2 + current.height();
-      console.log(innerBottom);
-      if (innerBottom > $(window).height()) { // if the block does not reach the screen bottom
-        subpage += 1;
-      } else if (page < (blocks.size()-1)) {
-        page += 1;
-        subpage = 0;
-      }
-    } else if (event.keyCode == 38) { // up
-      if (subpage > 0) {
-        subpage -= 1;
-      } else if (page > 0) {
-        page -= 1;
-        subpage = 0;
-      }
+    switch (event.keyCode)
+    {
+      case 40:
+        innerBottom = current.position().top + (current.outerHeight()-current.height()) / 2 + current.height();
+        console.log(innerBottom);
+        if (innerBottom > $(window).height()) { // if the block does not reach the screen bottom
+          subpage += 1;
+        } else if (page < (blocks.size()-1)) {
+          page += 1;
+          subpage = 0;
+        }
+        break;
+
+      case 38:
+        if (subpage > 0) {
+          subpage -= 1;
+        } else if (page > 0) {
+          page -= 1;
+          subpage = 0;
+        }
+        break;
     }
 
     blocks.eq(page).setToCenter(subpage);
